@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte Utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .icons img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .produits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .produit {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">Accueil</a>
+        </nav>
+        <div class="icons">
+            <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profil">
+            <img src="https://img.icons8.com/ios-filled/50/000000/appointment-reminders.png" alt="Notifications">
+            <img src="https://img.icons8.com/ios-filled/50/000000/new-message.png" alt="Messages">
+            <img src="https://img.icons8.com/ios-filled/50/000000/settings.png" alt="Paramètres">
+        </div>
+    </header>
+
+    <main>
+        <h1>Liste des produits</h1>
+        <div class="produits">
+            <div class="produit">Produit 1</div>
+            <div class="produit">Produit 2</div>
+            <div class="produit">Produit 3</div>
+            <div class="produit">Produit 4</div>
+            <div class="produit">Produit 5</div>
+        </div>
+    </main>
+
+</body>
+</html>
