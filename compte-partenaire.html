@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Compte Partenaire - Test IA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        .resultat {
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 20px;
+            background: #e8ffe8;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Compte Partenaire</h1>
+
+    <label>Métier du partenaire :</label>
+    <input type="text" id="metier" placeholder="Ex : comptable">
+
+    <button onclick="genererQCM()">Effectuer le test</button>
+
+    <form id="qcmForm"></form>
+
+    <button onclick="corrigerTest()" style="display:none;" id="btnCorrection">
+        Soumettre le test
+    </button>
+
+    <div id="resultat"></div>
+</div>
+
+<script>
+let bonnesReponses = [];
+
+function genererQCM() {
+    const metier = document.getElementById("metier").value.toLowerCase();
+    const form = document.getElementById("qcmForm");
+    const btnCorrection = document.getElementById("btnCorrection");
+
+    form.innerHTML = "";
+    bonnesReponses = [];
+
+    if (metier === "") {
+        alert("Veuillez entrer un métier.");
+        return;
+    }
+
+    let questions = [];
+
+    if (metier === "comptable") {
+        questions = [
+            {
+                q: "Qu’est-ce qu’un bilan comptable ?",
+                options: [
+                    "Un document qui montre la situation financière",
+                    "Une facture",
+                    "Un salaire",
+                    "Un impôt"
+                ],
+                correct: 0
+            },
+            {
+                q: "Que représente l’actif ?",
+                options: [
+                    "Les dettes",
+                    "Les biens et créances",
+                    "Les charges",
+                    "Les pertes"
+                ],
+                correct: 1
+            },
+            {
+                q: "La TVA est :",
+                options: [
+                    "Une charge",
+                    "Un produit",
+                    "Un impôt indirect",
+                    "Un salaire"
+                ],
+                correct: 2
+            },
+            {
+                q: "Qu’est-ce qu’un amortissement ?",
+                options: [
+                    "Une dette",
+                    "Une perte de valeur d’un bien",
+                    "Un profit",
+                    "Une taxe"
+                ],
+                correct: 1
+            },
+            {
+                q: "Le compte de résultat sert à :",
+                options: [
+                    "Mesurer la performance",
+                    "Lister les dettes",
+                    "Calculer la TVA",
+                    "Gérer le stock"
+                ],
+                correct: 0
+            },
+            {
+                q: "Qu’est-ce qu’une provision ?",
+                options: [
+                    "Une épargne",
+                    "Une charge probable",
+                    "Un revenu",
+                    "Une facture"
+                ],
+                correct: 1
+            },
+            {
+                q: "Le BFR correspond à :",
+                options: [
+                    "Besoin en Fonds de Roulement",
+                    "Bénéfice Financier Réel",
+                    "Budget Fiscal Régulier",
+                    "Base Fiscale"
+                ],
+                correct: 0
+            },
+            {
+                q: "Débit et crédit servent à :",
+                options: [
+                    "Payer les impôts",
+                    "Enregistrer les opérations",
+                    "Calculer les salaires",
+                    "Faire des factures"
+                ],
+                correct: 1
+            },
+            {
+                q: "Le résultat net est :",
+                options: [
+                    "Chiffre d’affaires",
+                    "Produits - Charges",
+                    "TVA",
+                    "Trésorerie"
+                ],
+                correct: 1
+            },
+            {
+                q: "Un exercice comptable dure généralement :",
+                options: [
+                    "6 mois",
+                    "1 an",
+                    "2 ans",
+                    "5 ans"
+                ],
+                correct: 1
+            }
+        ];
+    } else {
+        for (let i = 1; i <= 10; i++) {
+            questions.push({
+                q: "Question " + i + " liée au métier de " + metier,
+                options: [
+                    "Réponse A",
+                    "Réponse B",
+                    "Réponse C",
+                    "Réponse D"
+                ],
+                correct: 0
+            });
+        }
+    }
+
+    questions.forEach((item, index) => {
+        bonnesReponses.push(item.correct);
+
+        let bloc = document.createElement("div");
+        bloc.className = "question";
+
+        let html = `<p><strong>Question ${index + 1} :</strong> ${item.q}</p>`;
+
+        item.options.forEach((opt, i) => {
+            html += `
+                <label>
+                    <input type="radio" name="q${index}" value="${i}">
+                    ${opt}
+                </label><br>
+            `;
+        });
+
+        bloc.innerHTML = html;
+        form.appendChild(bloc);
+    });
+
+    btnCorrection.style.display = "block";
+    document.getElementById("resultat").innerHTML = "";
+}
+
+function corrigerTest() {
+    let score = 0;
+
+    bonnesReponses.forEach((bonne, index) => {
+        let radios = document.getElementsByName("q" + index);
+        radios.forEach(radio => {
+            if (radio.checked && parseInt(radio.value) === bonne) {
+                score++;
+            }
+        });
+    });
+
+    let pourcentage = (score / bonnesReponses.length) * 100;
+
+    document.getElementById("resultat").innerHTML = `
+        <div class="resultat">
+            Résultat : ${score} / ${bonnesReponses.length} <br>
+            Note finale : ${pourcentage.toFixed(0)} %
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
