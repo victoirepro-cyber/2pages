@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .fil-actualite {
+            background-color: #e0e0ff;
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .fil-actualite span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: defile 10s linear infinite;
+        }
+
+        @keyframes defile {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">MON SITE</div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="compte.html">Compte utilisateur</a>
+            <a href="#">Compte partenaire</a>
+            <a href="#">Nous contacter</a>
+        </nav>
+    </header>
+
+    <div class="fil-actualite">
+        <span>Votre site préféré pour passer des commandes — Défilement en continu...</span>
+    </div>
+
+    <main>
+        <h1>Bienvenue sur notre site !</h1>
+        <p>Découvrez nos produits et services.</p>
+    </main>
+
+</body>
+</html>
