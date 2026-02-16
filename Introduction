@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choix du pays - I-JOM</title>
+
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.video-bg {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.overlay {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+}
+
+.selection-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+</style>
+</head>
+
+<body>
+
+<video autoplay muted loop class="video-bg">
+    <source src="video/Introduction I-jom.mp4" type="video/mp4">
+</video>
+
+<div class="overlay">
+    <div class="selection-box">
+        <h2>Choisissez votre localisation</h2>
+
+        <select id="continent" onchange="updateCountries()">
+            <option value="">-- Choisir un continent --</option>
+            <option value="afrique">Afrique</option>
+            <option value="europe">Europe</option>
+            <option value="amerique">Amérique</option>
+            <option value="asie">Asie</option>
+        </select>
+
+        <select id="country">
+            <option value="">-- Choisir un pays --</option>
+        </select>
+
+        <button onclick="redirectUser()">Valider</button>
+    </div>
+</div>
+
+<script>
+
+// Base de données pays
+const countries = {
+    afrique: ["Côte d'Ivoire", "Sénégal", "Maroc", "Cameroun"],
+    europe: ["France", "Belgique", "Allemagne"],
+    amerique: ["Canada", "États-Unis", "Brésil"],
+    asie: ["Chine", "Inde", "Japon"]
+};
+
+// Mise à jour pays selon continent
+function updateCountries() {
+    let continent = document.getElementById("continent").value;
+    let countrySelect = document.getElementById("country");
+
+    countrySelect.innerHTML = '<option value="">-- Choisir un pays --</option>';
+
+    if(continent in countries) {
+        countries[continent].forEach(function(country) {
+            let option = document.createElement("option");
+            option.text = country;
+            option.value = country;
+            countrySelect.add(option);
+        });
+    }
+}
+
+// Redirection
+function redirectUser() {
+    let country = document.getElementById("country").value;
+
+    if(country === "") {
+        alert("Veuillez choisir un pays.");
+        return;
+    }
+
+    // Exemple de redirection dynamique
+    let formattedCountry = country.toLowerCase().replace(/ /g, "-");
+    window.location.href = "accueil-" + formattedCountry + ".html";
+}
+
+</script>
+
+</body>
+</html>
